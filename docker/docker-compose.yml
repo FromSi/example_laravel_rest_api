@@ -1,0 +1,52 @@
+version: '3.8'
+
+networks:
+    app:
+        driver: bridge
+
+services:
+    nginx:
+        container_name: ${APP_NAME}_nginx
+        image: nginx:alpine
+        restart: always
+        volumes:
+            - ../:/var/www:delegated
+            - ./nginx/:/etc/nginx/conf.d:delegated
+            - ./nginx/vhosts:/etc/nginx/vhosts:delegated
+            - ./nginx/logs:/var/log/nginx:delegated
+        depends_on:
+            - php-fpm
+        networks:
+            - app
+    php-fpm:
+        container_name: ${APP_NAME}_php
+        build: php-fpm
+        restart: always
+        volumes:
+            - ../:/var/www:delegated
+            - ./php-fpm/php.ini:/usr/local/etc/php/conf.d/40-custom.ini:delegated
+        depends_on:
+            - postgres
+        networks:
+            - app
+    postgres:
+        container_name: ${APP_NAME}_database
+        image: postgres:14
+        restart: always
+        ports:
+            - ${EXTERNAL_DB_PORT}:5432
+        environment:
+            POSTGRES_USER: ${DB_USERNAME}
+            POSTGRES_PASSWORD: ${DB_PASSWORD}
+        volumes:
+            - ./postgres/datadir:/var/lib/postgresql/data:delegated
+        networks:
+            - app
+    adminer:
+        container_name: ${APP_NAME}_adminer
+        image: adminer
+        restart: always
+        depends_on:
+            - postgres
+        networks:
+            - app
