@@ -15,6 +15,7 @@ install:
 	echo ${env}
 	cp docker/example.docker-compose.override.yml docker/docker-compose.override.yml
 	cp .env.example .env
+	mkdir docker/nginx/certs
 	${docker} up -d --build
 	${docker} exec php-fpm sh -c "composer install"
 	${docker} exec php-fpm sh -c "php artisan key:generate"
