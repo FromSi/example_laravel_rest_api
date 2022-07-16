@@ -1,4 +1,4 @@
-FROM --platform=linux/arm64 php:8.0-fpm
+FROM php:8.0-fpm
 
 ENV COMPOSER_MEMORY_LIMIT='-1'
 
