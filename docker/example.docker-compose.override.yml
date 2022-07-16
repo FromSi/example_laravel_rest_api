@@ -8,6 +8,9 @@ services:
   adminer:
     ports:
       - "8080:8080"
+  php-fpm:
+    environment:
+      - PHP_IDE_CONFIG=serverName=app
   postgres:
     environment:
       REPLICATION: 'true'

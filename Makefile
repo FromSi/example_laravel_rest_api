@@ -1,5 +1,6 @@
 env = ./.env.example
 
+# Определение ENV окружения, если еще не создовали (полезно для make install)
 ifneq ("$(wildcard ./.env)","")
     env = ./.env
 endif
