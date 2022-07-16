@@ -8,7 +8,6 @@ services:
     nginx:
         container_name: ${APP_NAME}_nginx
         image: nginx:alpine
-        restart: always
         volumes:
             - ../:/var/www:delegated
             - ./nginx/:/etc/nginx/conf.d:delegated
@@ -21,7 +20,6 @@ services:
     php-fpm:
         container_name: ${APP_NAME}_php
         build: php-fpm
-        restart: always
         volumes:
             - ../:/var/www:delegated
             - ./php-fpm/php.ini:/usr/local/etc/php/conf.d/40-custom.ini:delegated
@@ -32,7 +30,6 @@ services:
     postgres:
         container_name: ${APP_NAME}_database
         image: postgres:14
-        restart: always
         ports:
             - ${EXTERNAL_DB_PORT}:5432
         environment:
@@ -44,8 +41,14 @@ services:
             - app
     adminer:
         container_name: ${APP_NAME}_adminer
-        image: adminer
-        restart: always
+        image: michalhosna/adminer
+        environment:
+            ADMINER_DB: ${DB_DATABASE}
+            ADMINER_DRIVER: pgsql
+            ADMINER_PASSWORD: ${DB_PASSWORD}
+            ADMINER_SERVER: postgres
+            ADMINER_USERNAME: ${DB_USERNAME}
+            ADMINER_AUTOLOGIN: 1
         depends_on:
             - postgres
         networks:
