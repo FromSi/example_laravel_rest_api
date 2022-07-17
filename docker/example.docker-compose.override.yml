@@ -15,3 +15,5 @@ services:
     environment:
       REPLICATION: 'true'
       WAL_LEVEL: 'logical'
+    volumes:
+      - ./postgres/datadir:/var/lib/postgresql/data:delegated

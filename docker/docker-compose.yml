@@ -35,8 +35,6 @@ services:
         environment:
             POSTGRES_USER: ${DB_USERNAME}
             POSTGRES_PASSWORD: ${DB_PASSWORD}
-        volumes:
-            - ./postgres/datadir:/var/lib/postgresql/data:delegated
         networks:
             - app
     adminer:
