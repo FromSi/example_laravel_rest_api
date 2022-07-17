@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Response as ResponseAlias;
 class AuthController extends Controller
 {
     public function __construct(
-        private AuthService $authService
+        protected AuthService $authService
     )
     {
         // Здесь могла быть ваша реклама
