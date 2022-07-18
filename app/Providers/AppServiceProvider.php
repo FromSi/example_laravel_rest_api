@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use App\Services\Interfaces\AuthService;
+use App\Services\Interfaces\FreezerService;
+use App\Services\Interfaces\LocationCityService;
 use App\Services\Interfaces\LocationCountryService;
 use Illuminate\Support\ServiceProvider;
 
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function register()
+    public function register(): void
     {
         $this->app->bind(
             AuthService::class,
@@ -24,6 +26,16 @@ class AppServiceProvider extends ServiceProvider
             LocationCountryService::class,
             \App\Services\LocationCountryService::class
         );
+
+        $this->app->bind(
+            LocationCityService::class,
+            \App\Services\LocationCityService::class
+        );
+
+        $this->app->bind(
+            FreezerService::class,
+            \App\Services\FreezerService::class
+        );
     }
 
     /**
@@ -31,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot()
+    public function boot(): void
     {
         //
     }
