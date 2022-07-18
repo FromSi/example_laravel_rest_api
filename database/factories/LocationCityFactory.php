@@ -7,6 +7,7 @@ use App\Services\Interfaces\LocationCountryService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Facades\App;
+use JetBrains\PhpStorm\ArrayShape;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\LocationCity>
@@ -19,14 +20,15 @@ class LocationCityFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition()
+    #[ArrayShape([
+        'name' => "string",
+        'location_country_id' => "mixed"
+    ])]
+    public function definition(): array
     {
-        $locationCountryService = App::make(LocationCountryService::class);
-        $locationCountry = $locationCountryService->getRandomLocationCountry();
-
         return [
-            'name' => "{$this->faker->city} ({$locationCountry->name})",
-            'location_country_id' => $locationCountry
+            'name' => $this->faker->city,
+            'location_country_id' => LocationCountry::factory()
         ];
     }
 }

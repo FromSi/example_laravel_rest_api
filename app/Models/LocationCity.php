@@ -10,6 +10,11 @@ class LocationCity extends Model
 {
     use HasFactory;
 
+    /**
+     * Связь с @see LocationCountry::class
+     *
+     * @return BelongsTo
+     */
     public function locationCountry(): BelongsTo
     {
         return $this->belongsTo(LocationCountry::class);

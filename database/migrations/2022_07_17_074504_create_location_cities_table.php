@@ -13,16 +13,16 @@ return new class extends Migration
      *
      * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create(self::TABLE_NAME, function (Blueprint $table) {
             $table->id();
             $table->string('name')->comment('Название');
             $table->foreignId('location_country_id')
                 ->comment('Локация: страна')
+                ->index()
                 ->constrained('location_countries')
                 ->cascadeOnDelete();
-            $table->index('location_country_id');
             $table->timestamps();
         });
     }
@@ -32,7 +32,7 @@ return new class extends Migration
      *
      * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists(self::TABLE_NAME);
     }

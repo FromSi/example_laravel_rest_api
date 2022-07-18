@@ -10,7 +10,7 @@ interface AuthService
      * Создание пользователя
      *
      * @param mixed $fields
-     * @return void
+     * @return User
      */
     public function createUser(mixed $fields): User;
 

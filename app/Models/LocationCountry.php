@@ -10,6 +10,11 @@ class LocationCountry extends Model
 {
     use HasFactory;
 
+    /**
+     * Связь с @see LocationCity::class
+     *
+     * @return HasMany
+     */
     public function locationCities(): HasMany
     {
         return $this->hasMany(LocationCity::class);

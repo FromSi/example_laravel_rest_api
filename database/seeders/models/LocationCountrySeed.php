@@ -12,7 +12,7 @@ class LocationCountrySeed extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         LocationCountry::factory()
             ->count(5)

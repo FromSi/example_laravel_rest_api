@@ -11,14 +11,6 @@ class LocationCountryService implements Interfaces\LocationCountryService
     /**
      * @inheritDoc
      */
-    public function getRandomLocationCountry(): LocationCountry
-    {
-        return LocationCountry::inRandomOrder()->first();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function getLocationCountries(): Collection
     {
         return LocationCountry::all();

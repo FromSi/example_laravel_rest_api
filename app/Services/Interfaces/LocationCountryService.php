@@ -7,12 +7,6 @@ use Illuminate\Database\Eloquent\Collection;
 
 interface LocationCountryService
 {
-    /**
-     * Получить случайную страну
-     *
-     * @return LocationCountry
-     */
-    public function getRandomLocationCountry(): LocationCountry;
 
     /**
      * Получить все страны

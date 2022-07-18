@@ -95,7 +95,7 @@ class AuthService implements Interfaces\AuthService
         $logoutFromEverywhere = array_key_exists('logout_from_everywhere', $fields)
             && $fields['logout_from_everywhere'];
 
-        if ($user && $logoutFromEverywhere) {
+        if ($logoutFromEverywhere) {
             $result = true;
 
             $user->update([

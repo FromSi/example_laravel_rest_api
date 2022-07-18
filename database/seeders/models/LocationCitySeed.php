@@ -17,7 +17,7 @@ class LocationCitySeed extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run(): void
     {
         $locationCountryService = App::make(LocationCountryService::class);
         $locationCountries = $locationCountryService->getLocationCountries();
@@ -28,7 +28,7 @@ class LocationCitySeed extends Seeder
 
                 LocationCity::factory()
                     ->create([
-                        'name' => $faker->city . " ({$locationCountry->name})",
+                        'name' => $faker->city,
                         'location_country_id' => $locationCountry
                     ]);
             }
