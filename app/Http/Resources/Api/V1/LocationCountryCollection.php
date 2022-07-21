@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources\Api\V1;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class LocationCountryCollection extends ResourceCollection
@@ -9,10 +10,10 @@ class LocationCountryCollection extends ResourceCollection
     /**
      * Transform the resource collection into an array.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     * @param Request $request
+     * @return array
      */
-    public function toArray($request)
+    public function toArray($request): array
     {
         return parent::toArray($request);
     }
