@@ -10,4 +10,14 @@ use Illuminate\Routing\Controller as BaseController;
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
+
+    /**
+     * Получить число для пагинации
+     *
+     * @return int
+     */
+    protected function getApiPaginate(): int
+    {
+        return config('api.paginate');
+    }
 }
