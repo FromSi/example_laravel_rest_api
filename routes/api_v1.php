@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
+use App\Http\Controllers\Api\V1\LocationCityController;
 use App\Http\Controllers\Api\V1\LocationCountryController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,5 +32,8 @@ Route::group(['prefix' => 'auth'], function () {
 
 Route::group(['prefix' => 'location'], function () {
     Route::apiResource('countries', LocationCountryController::class)
+        ->only(['index', 'show']);
+
+    Route::apiResource('cities', LocationCityController::class)
         ->only(['index', 'show']);
 });
