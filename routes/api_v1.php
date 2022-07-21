@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\V1\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\V1\LocationCountryController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,11 +15,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::group(['prefix' => 'auth'], function() {
+Route::group(['prefix' => 'auth'], function () {
     Route::post('login', [AuthController::class, 'login']);
+
     Route::post('register', [AuthController::class, 'register']);
+
     Route::post('restore-password', [AuthController::class, 'restorePassword']);
-    Route::post('logout', [AuthController::class, 'logout'])->middleware(['auth:sanctum']);
-    Route::patch('user', [AuthController::class, 'userUpdate'])->middleware(['auth:sanctum']);
+
+    Route::post('logout', [AuthController::class, 'logout'])
+        ->middleware(['auth:sanctum']);
+
+    Route::patch('user', [AuthController::class, 'userUpdate'])
+        ->middleware(['auth:sanctum']);
 });
 
+Route::group(['prefix' => 'location'], function () {
+    Route::apiResource('countries', LocationCountryController::class)
+        ->only(['index', 'show']);
+});
