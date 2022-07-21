@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\Api\V1\LocationCountryCollection;
 use App\Http\Resources\Api\V1\LocationCountryResource;
 use App\Models\LocationCountry;
+use Spatie\QueryBuilder\QueryBuilder;
 
 class LocationCountryController extends Controller
 {
@@ -23,7 +24,14 @@ class LocationCountryController extends Controller
      */
     public function index(): LocationCountryCollection
     {
-        $locationCountries = $this->locationCountry->paginate($this->getApiPaginate());
+        $locationCountries = QueryBuilder::for($this->locationCountry)
+            ->allowedFilters([
+                'id',
+                'name'
+            ])->allowedSorts([
+                'id',
+                'name'
+            ])->paginate($this->getApiPaginate());
 
         return new LocationCountryCollection($locationCountries);
     }
@@ -36,7 +44,8 @@ class LocationCountryController extends Controller
      */
     public function show(int $locationCountryId): LocationCountryResource
     {
-        $locationCountry = $this->locationCountry->findOrFail($locationCountryId);
+        $locationCountry = QueryBuilder::for($this->locationCountry)
+            ->findOrFail($locationCountryId);
 
         return new LocationCountryResource($locationCountry);
     }

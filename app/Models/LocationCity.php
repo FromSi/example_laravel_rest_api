@@ -28,4 +28,14 @@ class LocationCity extends Model
     {
         return $this->belongsTo(LocationCountry::class);
     }
+
+    /**
+     * Связь с @see LocationCountry::class
+     *
+     * @return BelongsTo
+     */
+    public function country(): BelongsTo
+    {
+        return $this->belongsTo(LocationCountry::class, 'location_country_id');
+    }
 }

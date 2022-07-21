@@ -31,7 +31,7 @@ class LocationCityResource extends JsonResource
             'id' => $this->id,
             'name' => $this->name,
             'country_id' => $this->location_country_id,
-            'country' => (new LocationCountryResource($this->whenLoaded('locationCountry')))
+            'country' => (new LocationCountryResource($this->whenLoaded('country')))
         ];
     }
 }
