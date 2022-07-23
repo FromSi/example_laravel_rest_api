@@ -32,6 +32,10 @@
 - Фильтрация – `/endpoint?filter[name]=Fridge`
 - Подключение сущностей – `/endpoint?include=subject`
 
+## Хосты для работы с проектом
+- http://localhost:8080 – для работы с БД
+- http://localhost – для работы с REST API
+
 ## Управление проектом
 - `make install` – установка проекта через Docker
 - `make run` – запуск проекта через Docker

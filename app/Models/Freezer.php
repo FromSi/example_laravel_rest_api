@@ -11,6 +11,11 @@ class Freezer extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     /**
      * Связь с @see LocationCity::class
      *
@@ -19,6 +24,16 @@ class Freezer extends Model
     public function locationCity(): BelongsTo
     {
         return $this->belongsTo(LocationCity::class);
+    }
+
+    /**
+     * Связь с @see LocationCity::class
+     *
+     * @return BelongsTo
+     */
+    public function city(): BelongsTo
+    {
+        return $this->belongsTo(LocationCity::class, 'location_city_id');
     }
 
     /**

@@ -10,6 +10,7 @@ use JetBrains\PhpStorm\ArrayShape;
  * @property int $id
  * @property string $name
  * @property int $location_country_id
+ * @property int $freezers_count
  */
 class LocationCityResource extends JsonResource
 {
@@ -23,15 +24,22 @@ class LocationCityResource extends JsonResource
         'id' => "int",
         'name' => "string",
         'country_id' => "int",
-        'country' => "\App\Http\Resources\Api\V1\LocationCountryResource"
+        'country' => "\App\Http\Resources\Api\V1\LocationCountryResource",
+        'freezer_count' => "int"
     ])]
     public function toArray($request): array
     {
-        return [
+        $resource = [
             'id' => $this->id,
             'name' => $this->name,
             'country_id' => $this->location_country_id,
             'country' => (new LocationCountryResource($this->whenLoaded('country')))
         ];
+
+        if ($this->freezers_count) {
+            $resource['freezer_count'] = $this->freezers_count;
+        }
+
+        return $resource;
     }
 }

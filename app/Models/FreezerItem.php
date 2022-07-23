@@ -10,6 +10,11 @@ class FreezerItem extends Model
 {
     use HasFactory;
 
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     /**
      * Связь с @see Freezer::class
      *

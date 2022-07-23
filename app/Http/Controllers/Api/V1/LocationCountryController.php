@@ -28,10 +28,13 @@ class LocationCountryController extends Controller
             ->allowedFilters([
                 'id',
                 'name'
-            ])->allowedSorts([
+            ])
+            ->allowedSorts([
                 'id',
                 'name'
-            ])->paginate($this->getApiPaginate());
+            ])
+            ->withCount('locationCities')
+            ->paginate($this->getApiPaginate());
 
         return new LocationCountryCollection($locationCountries);
     }
@@ -45,6 +48,7 @@ class LocationCountryController extends Controller
     public function show(int $locationCountryId): LocationCountryResource
     {
         $locationCountry = QueryBuilder::for($this->locationCountry)
+            ->withCount('locationCities')
             ->findOrFail($locationCountryId);
 
         return new LocationCountryResource($locationCountry);

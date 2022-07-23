@@ -31,11 +31,14 @@ class LocationCityController extends Controller
                 'id',
                 'name',
                 AllowedFilter::exact('country_id', 'location_country_id')
-            ])->allowedSorts([
+            ])
+            ->allowedSorts([
                 'id',
                 'name',
-                AllowedSort::field( 'country_id', 'location_country_id')
-            ])->paginate($this->getApiPaginate());
+                AllowedSort::field('country_id', 'location_country_id')
+            ])
+            ->withCount('freezers')
+            ->paginate($this->getApiPaginate());
 
         return new LocationCityCollection($locationCities);
     }
@@ -50,6 +53,7 @@ class LocationCityController extends Controller
     {
         $locationCity = QueryBuilder::for($this->locationCity)
             ->allowedIncludes('country')
+            ->withCount('freezers')
             ->findOrFail($locationCityId);
 
         return new LocationCityResource($locationCity);

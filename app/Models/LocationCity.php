@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @method paginate(int $getApiPaginate)
@@ -27,6 +28,16 @@ class LocationCity extends Model
     public function locationCountry(): BelongsTo
     {
         return $this->belongsTo(LocationCountry::class);
+    }
+
+    /**
+     * Связь с @see Freezer::class
+     *
+     * @return HasMany
+     */
+    public function freezers(): HasMany
+    {
+        return $this->hasMany(Freezer::class);
     }
 
     /**
